@@ -1,0 +1,44 @@
+﻿@model List<ProductDetail>
+@{
+    ViewBag.Title = "GetProductsByCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Count > 0)
+{
+    <div class="container">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-3">
+                    <div href="#" class="card card-product-grid">
+                        <a href="#" class="img-wrap"> <img src="~/Content/images/products/@product.ImagePath"> </a>
+                        <figcaption class="info-wrap">
+                            <a href="#" class="title">@product.ProductName</a>
+
+                            <div class="rating-wrap">
+                                <ul class="rating-stars">
+                                    <li style="width:80%" class="stars-active">
+                                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                                    </li>
+                                </ul>
+                                <span class="label-rating text-muted">@product.SubCategoryName / </span>
+                                <span class="label-rating text-muted">@product.CategoryName</span>
+                            </div>
+                            <div class="price mt-1">@product.UnitPrice</div>
+                            <button class="btn btn-primary btn-sm">Sepete Ekle</button>
+                        </figcaption>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <h5 class="text-danger text-center">"Bu kategoride ürün bulunmamaktadır!"</h5>
+}
+

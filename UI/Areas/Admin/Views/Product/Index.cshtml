@@ -1,0 +1,47 @@
+﻿@model List<Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ActionLink("Ürün Ekle", "Create", "Product", null, new { @class = "btn btn-success btn-sm" })
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Ürün Kategorisi</th>
+                        <th>Ürün Fiyatı</th>
+                        <th>Ürün Stok Miktarı</th>
+                        <th>Ürün Fotoğrafı</th>
+                        <th>Güncelle/Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model)
+                    {
+                    <tr>
+                        <td>@product.ProductName</td>
+                        @foreach (var subCategory in ViewBag.SubCategories as List<SubCategory>)
+                        {
+                            if (subCategory.ID == product.SubCategoryId)
+                            {
+                                <td>@subCategory.SubCategoryName</td>
+                            }
+                        }
+                        <td>@product.UnitPrice</td>
+                        <td>@product.UnitsInStock</td>
+                        <td><img src="~/Content/images/products/@product.ImagePath" width="150" height="150" /></td>
+                        <td>
+                            @Html.ActionLink("Güncelle", "Edit", "Product", new { id = product.ID }, new { @class = "btn btn-warning btn-sm" })
+                            @Html.ActionLink("Sil", "Delete", "Product", new { id = product.ID }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
